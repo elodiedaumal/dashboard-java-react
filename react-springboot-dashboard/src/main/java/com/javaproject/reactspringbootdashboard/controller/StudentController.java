@@ -20,6 +20,8 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudents() {
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.FOUND);
     }
+
+    @PostMapping
     public Student addStudent(@RequestBody Student student) {
       return studentService.addStudent(student);
     }
@@ -31,9 +33,9 @@ public class StudentController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteStudent(@PathVariable Long id){
-studentService.deleteStudent(id);
+        studentService.deleteStudent(id);
     }
-    @PutMapping("/student/{id}")
+    @GetMapping("/student/{id}")
     public Student getStudentById(@PathVariable Long id){
       return  studentService.getStudentById(id);
     }

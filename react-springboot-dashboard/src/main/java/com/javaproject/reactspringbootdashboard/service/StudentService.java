@@ -49,6 +49,9 @@ public class StudentService implements IStudentService {
 
     @Override
     public void deleteStudent(Long id) {
+        if(!studentRepository.existsById(id)){
+            throw  new StudentNotFoundException("Sorry, student with this id: " + id + " could not be found!");
+        }
 
     }
     private boolean studentAlreadyExist(String email) {

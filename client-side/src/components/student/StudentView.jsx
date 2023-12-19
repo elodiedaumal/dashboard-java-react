@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { SiCodereview } from "react-icons/si";
 import { ImCross } from "react-icons/im";
 
@@ -91,9 +92,16 @@ const StudentView = () => {
 
                         <td>
                            <div className='flex gap-5 items-center justify-center cursor-pointer'>
-                              <SiCodereview className='text-green-500' />
-                              <GrUpdate />
-                              <ImCross className='text-red-500 ' />
+                              <Link to={`/edit-student/${student.id}`}>
+                                 <SiCodereview className='text-green-500' />
+                              </Link>
+                              <Link to={`/student-profile/${student.id}`}>
+                                 <GrUpdate />
+                              </Link>
+
+                              <Link to={`/delete-student/${student.id}`}>
+                                 <ImCross className='text-red-500 ' />
+                              </Link>
                            </div>
                         </td>
                      </tr>

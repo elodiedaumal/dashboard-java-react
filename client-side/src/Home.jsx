@@ -4,7 +4,7 @@ import StudentView from "./components/student/StudentView";
 const Home = () => {
    return (
       <div>
-         <h2>Home</h2>
+         <h2>View all students</h2>
          <StudentView />
       </div>
    );

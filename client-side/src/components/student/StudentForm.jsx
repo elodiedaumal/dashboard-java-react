@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const AddStudentForm = () => {
-   const [student, setStudent] = useState([
-      {
-         firstName: "",
-         lastName: "",
-         email: "",
-         department: "",
-      },
-   ]);
+const StudentForm = ({ initialValues, onSubmit, isUpdate }) => {
+   const navigate = useNavigate();
+
+   const [student, setStudent] = useState(initialValues);
+
+   useEffect(() => {
+      setStudent(initialValues);
+   }, [initialValues]);
 
    const { firstName, lastName, email, department } = student;
 
@@ -17,15 +17,24 @@ const AddStudentForm = () => {
       setStudent({ ...student, [name]: value });
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
-      // Add your logic to handle form submission
-      console.log("Form submitted:", student);
+
+      const updatedStudent = {
+         firstName: student.firstName,
+         lastName: student.lastName,
+         email: student.email,
+         department: student.department,
+      };
+      await onSubmit(updatedStudent);
+      navigate("/");
    };
 
    return (
       <div className='max-w-md mx-auto mt-8 p-8 bg-white rounded-md shadow-md'>
-         <h2 className='text-2xl font-bold mb-6'>Add New Student</h2>
+         <h2 className='text-2xl font-bold mb-6'>
+            {isUpdate ? "Update Student" : "Add New Student"}
+         </h2>
 
          <form onSubmit={handleSubmit}>
             <div className='mb-4'>
@@ -102,13 +111,21 @@ const AddStudentForm = () => {
 
             <button
                type='submit'
-               className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600'
+               className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-10'
             >
-               Add Student
+               {isUpdate ? "Update Student" : "Add Student"}
             </button>
+            <Link to='/'>
+               <button
+                  type='submit'
+                  className='border border-red-400 text-red-400 px-4 py-2 rounded-md hover:bg-red-400 hover:border-red-400 hover:text-white'
+               >
+                  Cancel
+               </button>
+            </Link>
          </form>
       </div>
    );
 };
 
-export default AddStudentForm;
+export default StudentForm;

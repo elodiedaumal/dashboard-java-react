@@ -1,5 +1,5 @@
 import React from "react";
-import StudentView from "./components/student/StudentView";
+import StudentView from "../components/student/StudentView";
 
 const Home = () => {
    return (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getStudents, deleteStudent } from "../../axios/axios";
+
 import { Link } from "react-router-dom";
 import { SiCodereview } from "react-icons/si";
 import { ImCross } from "react-icons/im";
@@ -12,18 +13,17 @@ const StudentView = () => {
    const [students, setStudents] = useState([]);
 
    useEffect(() => {
-      getStudents();
+      fetchStudents();
    }, []);
 
-   const getStudents = async () => {
-      const results = await axios.get("http://localhost:8080/students", {
-         validateStatus: () => {
-            return true;
-         },
-      });
-      if (results.status === 302) {
-         setStudents(results.data);
-      }
+   const fetchStudents = async () => {
+      const data = await getStudents();
+      setStudents(data || []);
+   };
+
+   const handleDelete = async (id) => {
+      await deleteStudent(id);
+      fetchStudents();
    };
 
    return (
@@ -99,9 +99,9 @@ const StudentView = () => {
                                  <GrUpdate />
                               </Link>
 
-                              <Link to={`/delete-student/${student.id}`}>
+                              <button onClick={() => handleDelete(student.id)}>
                                  <ImCross className='text-red-500 ' />
-                              </Link>
+                              </button>
                            </div>
                         </td>
                      </tr>

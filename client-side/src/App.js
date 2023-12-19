@@ -1,7 +1,8 @@
-import Home from "./Home";
+import Home from "./pages/Home";
+import AddStudent from "./pages/AddStudent";
+import UpdateStudent from "./pages/UpdateStudent";
 import Navbar from "./components/commun/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AddStudentForm from "./components/student/AddStudentForm";
 
 function App() {
    return (
@@ -9,7 +10,8 @@ function App() {
          <Navbar />
          <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/add' element={<AddStudentForm />} />
+            <Route path='/add' element={<AddStudent />} />
+            <Route path='student-profile/:id' element={<UpdateStudent />} />
          </Routes>
       </Router>
    );

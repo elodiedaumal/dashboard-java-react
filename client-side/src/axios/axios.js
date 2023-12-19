@@ -31,10 +31,24 @@ const deleteStudent = async (id, student) => {
    return axios.delete(`http://localhost:8080/students/delete/${id}`, student);
 };
 
+const studentAlreadyExist = async (email) => {
+   const results = await axios.get(
+      `http://localhost:8080/students/email/${email}`,
+      {
+         validateStatus: () => {
+            return true;
+         },
+      }
+   );
+
+   return results.status === 302;
+};
+
 export {
    getStudents,
    addStudent,
    updateStudent,
    deleteStudent,
    getSpecificStudent,
+   studentAlreadyExist,
 };

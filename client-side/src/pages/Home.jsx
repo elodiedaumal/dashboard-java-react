@@ -1,11 +1,15 @@
-import React from "react";
-import StudentView from "../components/student/StudentView";
+import React, { useState } from "react";
+import StudentsView from "../components/student/StudentsView";
+import SearchBar from "../components/SearchBar"; // Import the new SearchBar component
 
 const Home = () => {
+   const [searchQuery, setSearchQuery] = useState("");
+
    return (
       <div>
-         <h2>View all students</h2>
-         <StudentView />
+         <SearchBar value={searchQuery} onChange={setSearchQuery} />
+
+         <StudentsView searchQuery={searchQuery} />
       </div>
    );
 };

@@ -22,13 +22,11 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student addStudent(Student student) {
-        if(studentAlreadyExist(student.getEmail())){
-            throw new StudentAlreadyExistException(student.getEmail() + " email address already use");
+        if (studentAlreadyExist(student.getEmail())) {
+            throw new StudentAlreadyExistException(student.getEmail() + " already exists!");
         }
         return studentRepository.save(student);
     }
-
-
 
 
     @Override
@@ -37,24 +35,29 @@ public class StudentService implements IStudentService {
             st.setFirstName((student.getFirstName()));
             st.setLastName((student.getLastName()));
             st.setDepartment((student.getDepartment()));
+            st.setGrade((student.getGrade()));
+            st.setYear((student.getYear()));
             st.setEmail((student.getEmail()));
             return studentRepository.save(st);
-        } ).orElseThrow(()-> new StudentNotFoundException("Sorry, this student could not be found!"));
+        }).orElseThrow(() -> new StudentNotFoundException("Sorry, this student could not be found!"));
     }
 
     @Override
     public Student getStudentById(Long id) {
-        return studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundException("Sorry, student with this id: " + id + " could not be found!"));
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Sorry, student with this id: " + id + " could not be found!"));
     }
 
     @Override
     public void deleteStudent(Long id) {
-        if(!studentRepository.existsById(id)){
+        if (!studentRepository.existsById(id)) {
             throw new StudentNotFoundException("Sorry, student with this id: " + id + " could not be found!");
         }
         studentRepository.deleteById(id);
     }
     private boolean studentAlreadyExist(String email) {
-return studentRepository.findByEmail(email).isPresent();
+        return studentRepository.findByEmail(email).isPresent();
     }
+
+
 }
+

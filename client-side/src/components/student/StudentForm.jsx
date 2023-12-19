@@ -10,7 +10,7 @@ const StudentForm = ({ initialValues, onSubmit, isUpdate }) => {
       setStudent(initialValues);
    }, [initialValues]);
 
-   const { firstName, lastName, email, department } = student;
+   const { firstName, lastName, email, department, year, grade } = student;
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -25,6 +25,8 @@ const StudentForm = ({ initialValues, onSubmit, isUpdate }) => {
          lastName: student.lastName,
          email: student.email,
          department: student.department,
+         year: student.year,
+         grade: student.grade,
       };
       await onSubmit(updatedStudent);
       navigate("/");
@@ -108,6 +110,44 @@ const StudentForm = ({ initialValues, onSubmit, isUpdate }) => {
                   required
                />
             </div>
+            {isUpdate && (
+               <>
+                  <div className='mb-4'>
+                     <label
+                        className='block text-gray-700 text-sm font-bold mb-2'
+                        htmlFor='year'
+                     >
+                        Year:
+                     </label>
+                     <input
+                        type='text'
+                        id='year'
+                        name='year'
+                        value={year}
+                        onChange={handleChange}
+                        className='w-full p-2 border rounded-md'
+                        required
+                     />
+                  </div>
+                  <div className='mb-4'>
+                     <label
+                        className='block text-gray-700 text-sm font-bold mb-2'
+                        htmlFor='grade'
+                     >
+                        Grade:
+                     </label>
+                     <input
+                        type='text'
+                        id='grade'
+                        name='grade'
+                        value={grade}
+                        onChange={handleChange}
+                        className='w-full p-2 border rounded-md'
+                        required
+                     />
+                  </div>
+               </>
+            )}
 
             <button
                type='submit'

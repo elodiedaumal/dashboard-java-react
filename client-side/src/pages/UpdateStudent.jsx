@@ -9,7 +9,6 @@ const UpdateStudent = () => {
    const { id } = useParams();
 
    const handleSubmit = async (updatedStudent) => {
-      console.log(updatedStudent);
       await updateStudent(id, updatedStudent);
       navigate("/");
    };
@@ -33,6 +32,8 @@ const UpdateStudent = () => {
             lastName: student.lastName || "",
             email: student.email || "",
             department: student.department || "",
+            year: student.year || "",
+            grade: student.grade || "",
          }}
          onSubmit={handleSubmit}
          isUpdate={true}

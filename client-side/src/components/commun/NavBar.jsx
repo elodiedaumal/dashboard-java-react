@@ -31,7 +31,7 @@ const Navbar = () => {
             {/* Navbar links */}
             <div
                className={`md:flex md:items-center md:w-auto ${
-                  menuOpen ? "block" : "hidden"
+                  menuOpen ? "flex justify-center items-center" : "hidden"
                }`}
             >
                <Link
@@ -39,18 +39,6 @@ const Navbar = () => {
                   className='block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-400 mr-4'
                >
                   Add new student
-               </Link>
-               <Link
-                  to='/update'
-                  className='block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-400 mr-4'
-               >
-                  Update student
-               </Link>
-               <Link
-                  to='/delete'
-                  className='block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-400'
-               >
-                  Delete student
                </Link>
 
                {menuOpen && (

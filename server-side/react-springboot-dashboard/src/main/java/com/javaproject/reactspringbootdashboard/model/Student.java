@@ -27,5 +27,7 @@ public class Student {
 
     @NaturalId(mutable = true)
     private String email;
+    private int year;
+    private double grade;
     private String department;
 }

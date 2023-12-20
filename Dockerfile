@@ -3,6 +3,6 @@ COPY server-side/react-springboot-dashboard .
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/java-project-0.0.1-SNAPSHOT.jar java-project.jar
+COPY --from=build /java-project-0.0.1-SNAPSHOT.jar java-project.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","java-project.jar"]

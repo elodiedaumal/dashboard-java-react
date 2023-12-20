@@ -1,10 +1,12 @@
 # Build Stage
 FROM maven:3.8.5-openjdk-17 AS build
-COPY java-project/server-side/react-springboot-dashboard .
+WORKDIR /app
+COPY server-side/react-springboot-dashboard .
 RUN mvn clean package -DskipTests
 
 # Final Stage
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build java-project/server-side/react-springboot-dashboard/target/*.jar java-project.jar
+WORKDIR /app
+COPY --from=build /app/target/*.jar react-springboot-dashboard.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "java-project.jar"]
+ENTRYPOINT ["java", "-jar", "react-springboot-dashboard.jar"]
